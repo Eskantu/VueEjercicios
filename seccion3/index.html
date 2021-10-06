@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+		<script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
+		<title>Vuex</title>
+	</head>
+	<body>
+		<div id="app">
+			<titulo></titulo>
+		</div>
+		<script src="./componentes/titutlo.js"></script>
+		<script src="./componentes/hijo.js"></script>
+	</body>
+</html>
+
+<script>
+	const store = new Vuex.Store({
+		state: {
+			numero: 10,
+			cursos: [],
+		},
+		mutations: {
+			aumentar(state) {
+				state.numero++;
+			},
+			disminuir(state, n) {
+				state.numero -= n;
+			},
+			llenarCursos(state, cursosAccion) {
+				state.cursos = cursosAccion;
+			},
+		},
+		actions: {
+			ObtenerCursos: async function ({ commit }) {
+				const data = await fetch("./API/cursos.json");
+				const cursos = await data.json();
+				commit("llenarCursos", cursos);
+			},
+		},
+	});
+	new Vue({
+		el: "#app",
+		store,
+	});
+</script>
