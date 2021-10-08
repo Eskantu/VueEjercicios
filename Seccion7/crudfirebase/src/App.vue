@@ -1,10 +1,20 @@
 <template>
-  <div id="app" class="container">
-    <div class="text-center">
-      <router-link to="/" class="text-center">
-        <img src="@/assets/logo.png" />
-      </router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app class="container">
+    <v-main>
+      <Logo></Logo>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
+
+<script>
+import Logo from "./components/HelloWorld.vue";
+export default {
+  name: "App",
+
+  data: () => ({}),
+  components: {
+    Logo,
+  },
+};
+</script>
